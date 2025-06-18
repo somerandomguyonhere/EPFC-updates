@@ -28,7 +28,7 @@
       display: flex;
       justify-content: center;
     }
-    #updatebutton {
+    #updateBtn {
       padding: 15px 30px;
       background-color: transparent;
       border: 2px solid #fff;
@@ -78,14 +78,14 @@
 </head>
 <body>
   <div class="container">
-    <button id="updatebutton">UPDATE C063</button>
+    <button id="updateBtn">UPDATE C063</button>
     <div id="menu"></div>
   </div>
   <div id="displayText"></div>
 
   <script>
     const menu = document.getElementById('menu');
-    const updatebutton = document.getElementById('updatebutton');
+    const updateBtn = document.getElementById('updateBtn');
     const displayText = document.getElementById('displayText');
 
     // Codes to skip (e.g., updates that were skipped)
@@ -114,21 +114,21 @@
       btn.textContent = `UPDATE ${id}`;
       btn.addEventListener('click', () => {
         menu.style.display = 'none';
-        updatebutton.textContent = `UPDATE ${id}`;
+        updateBtn.textContent = `UPDATE ${id}`;
         displayText.textContent = messages[id] || `UPDATE ${id}`;
       });
       menu.appendChild(btn);
     }
 
     // Toggle menu visibility
-    updatebutton.addEventListener('click', (e) => {
+    updateBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
     });
 
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
-      if (!updatebutton.contains(e.target) && !menu.contains(e.target)) {
+      if (!updateBtn.contains(e.target) && !menu.contains(e.target)) {
         menu.style.display = 'none';
       }
     });
