@@ -8,8 +8,6 @@
     @font-face {
       font-family: 'Zelkon';
       src: url('fonts/Zelkon.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
     }
     html, body {
       margin: 0;
@@ -30,7 +28,7 @@
       display: flex;
       justify-content: center;
     }
-    #updateButton {
+    #updatebutton {
       padding: 15px 30px;
       background-color: transparent;
       border: 2px solid #fff;
@@ -80,50 +78,57 @@
 </head>
 <body>
   <div class="container">
-    <button id="updateButton">UPDATE C063</button>
+    <button id="updatebutton">UPDATE C063</button>
     <div id="menu"></div>
   </div>
   <div id="displayText"></div>
 
   <script>
     const menu = document.getElementById('menu');
-    const updateButton = document.getElementById('updateButton');
+    const updatebutton = document.getElementById('updatebutton');
     const displayText = document.getElementById('displayText');
 
+    // Codes to skip (e.g., updates that were skipped)
+    const skipped = new Set(["C062"]);
+    const skipped = new Set(["C061"]);
+    
     // Custom display messages for each code
     const messages = {
-      "C063": "test",
-      "C062": "test",
-      "C057": "test",
+      "C063": "Various bugfixes",
+      "C060": "- New Challenges Available in The Financier
+- Contact Network Update
+  - Contact network has been reworked and all credibility has been refunded
+  - New items: Trackers, Frag Grenades, Ballistic Shield, Satchel, Concealed Scout Armor
+  - New item mods: Botnet Nexus (Hacking Tablet), Trauma Kit (Medkit), Reinforced Bit (Drill)
+  - New weapon mods: CBR-C Extended Magazine/Barrel, 480 Short Barrel
+  - UP9 has been added as the new starting pistol. The K45 is available through the contact network",
       // Add or edit entries here for different C### codes
     };
 
-    // Generate menu buttons dynamically
-    for (let i = 63; i >= 10; i--) {
+    // Generate menu buttons dynamically, skipping specified codes, down to 1
+    for (let i = 63; i >= 1; i--) {
       const code = i.toString().padStart(3, '0');
       const id = `C${code}`;
+      if (skipped.has(id)) continue;
       const btn = document.createElement('button');
       btn.textContent = `UPDATE ${id}`;
       btn.addEventListener('click', () => {
-        // Close menu
         menu.style.display = 'none';
-        // Update top button text
-        updateButton.textContent = `UPDATE ${id}`;
-        // Set display text from messages mapping or default to button text
+        updatebutton.textContent = `UPDATE ${id}`;
         displayText.textContent = messages[id] || `UPDATE ${id}`;
       });
       menu.appendChild(btn);
     }
 
     // Toggle menu visibility
-    updateButton.addEventListener('click', (e) => {
+    updatebutton.addEventListener('click', (e) => {
       e.stopPropagation();
       menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
     });
 
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
-      if (!updateButton.contains(e.target) && !menu.contains(e.target)) {
+      if (!updatebutton.contains(e.target) && !menu.contains(e.target)) {
         menu.style.display = 'none';
       }
     });
